@@ -1,0 +1,107 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
+
+<h1><?= $title ?></h1>
+
+<div class="jw-modern-palettes mb-5">
+
+    <form method="post">
+        <?= csrf_field() ?>
+        <input type="hidden" name="save" id="save" value="1">
+
+        <hr/>
+        <h4><?= I18N::translate('Palettes') ?></h4>
+
+         <!-- ENABLE UNSUPPORTED -->
+         <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="enable-unsupported">
+                <?= I18N::translate('Enable unsupported palettes') ?>
+            </label>
+            <div class="col-sm-9 my-auto">
+                <?= view('components/radios-inline', ['name' => 'enable-unsupported', 'options' => [I18N::translate('no'), I18N::translate('yes')], 'selected' => (int) $enable_unsupported]) ?>
+            </div>
+        </div>       
+
+         <!-- DEFAULT PALETTE -->
+         <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="palette">
+                <?= I18N::translate('Default color palette') ?>
+            </label>
+            <div class="col-sm-9">
+                <?= view('components/select', ['name' => 'palette', 'selected' => $palette, 'options' => $palettes]) ?>
+            </div>
+        </div>
+
+        <!-- ALLOW SWITCH TO ANOTHER COLOR PALETTE -->
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="allow-switch">
+                <?= I18N::translate('Allow visitors to switch to another color palette') ?>
+            </label>
+            <div class="col-sm-9 my-auto">
+                <?= view('components/radios-inline', ['name' => 'allow-switch', 'options' => [I18N::translate('no'), I18N::translate('yes')], 'selected' => (int) $allow_switch]) ?>
+            </div>
+        </div>
+
+        <!-- CUSTOMIZATIONS -->
+        <hr/>
+        <h4><?= I18N::translate('Customizations') ?></h4>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="enable-menu-icons">
+                <?= I18N::translate('Enable icons for headings and menus') ?>
+            </label>
+            <div class="col-sm-9 my-auto">
+                <?= view('components/radios-inline', ['name' => 'enable-menu-icons', 'options' => [I18N::translate('no'), I18N::translate('yes')], 'selected' => (int) $enable_menu_icons]) ?>
+            </div>
+        </div>    
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="enable-fact-icons">
+                <?= I18N::translate('Enable icons for facts') ?>
+            </label>
+            <div class="col-sm-9 my-auto">
+                <?= view('components/radios-inline', ['name' => 'enable-fact-icons', 'options' => [I18N::translate('no'), I18N::translate('yes')], 'selected' => (int) $enable_fact_icons]) ?>
+            </div>
+        </div>                
+
+        <!-- SAVE BUTTON -->
+        <hr/>
+        <button type="submit" class="btn btn-primary">
+            <?= view('icons/save') ?>
+            <?= I18N::translate('save') ?>
+        </button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var optionsBackup = $('select[name="palette"] option').clone();
+
+    $('input[name="enable-unsupported"]').on('change', function() {
+        var value = $(this).val();
+        if (value === '0') {
+            // remove all options that start with "bootswatch-"
+            $('select[name="palette"] option').each(function() {
+                if ($(this).val().startsWith('bootswatch-')) {
+                    $(this).remove();
+                }
+            });
+        } else {
+            // add all options back from the backup
+            $('select[name="palette"]').empty().append(optionsBackup.clone());
+        }
+    });
+
+    // Trigger change event on the selected radio button on page load
+    $('input[name="enable-unsupported"]:checked').trigger('change');
+});
+</script>
+
+
+
+

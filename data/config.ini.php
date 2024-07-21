@@ -1,0 +1,10 @@
+; <?php return; ?> DO NOT DELETE THIS LINE
+dbtype="mysql"
+dbhost="localhost"
+dbport="3306"
+dbuser="webtreesdude"
+dbpass="Web@2024#"
+dbname="webtrees"
+tblpfx="wt_"
+base_url="https://webtrees.kot-tab.com"
+rewrite_urls="0"

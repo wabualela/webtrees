@@ -1,0 +1,41 @@
+# MODULE
+
+msgid "modern"
+msgstr "modern"
+
+# MODULE - SETTINGS
+
+msgid "Default color palette"
+msgstr "Default color palette"
+
+msgid "Allow visitors to switch to another color palette"
+msgstr "Allow visitors to switch to another color palette"
+
+msgid "Customizations"
+msgstr "Customizations"
+
+msgid "Enable icons for headings and menus"
+msgstr "Enable icons for headings and menus"
+
+msgid "Enable icons for facts"
+msgstr "Enable icons for facts"
+
+msgid "Enable unsupported palettes"
+msgstr "Enable unsupported palettes"
+
+# MENUS
+
+msgid "MAIN MENU"
+msgstr "MAIN MENU"
+
+msgid "SETTINGS"
+msgstr "SETTINGS"
+
+# RELATION
+msgctxt "modern-relation"
+msgid "you"
+msgstr "you"
+
+msgctxt "modern-relation"
+msgid "your"
+msgstr "your"
